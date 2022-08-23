@@ -4,9 +4,10 @@ EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 from flask import flash
 
 class User():
+    db_name = 'project_schema'
     def __init__(self ,data):
             self.id=data['id']
-            self.type=data['type']
+            # self.type=data['type']
             self.first_name=data['first_name']
             self.last_name=data['last_name']
             self.education=data['education']
@@ -21,25 +22,28 @@ class User():
             self.updated_at=data['updated_at']
  
 
-#  @classmethod
-#     def add_user(cls ,data):
-#         query="INSERT INTO users (first_name , last_name , email , password) Values (%(first_name)s,%(last_name)s,%(email)s,%(password)s);"
-#         return connectToMySQL('tv_shows').query_db(query,data)
+    @classmethod
+    def add_user(cls ,data):
+        query="INSERT INTO users (first_name, last_name, education, experience, email, phone, password, birth_date, information, picture) Values ( %(first_name)s, %(last_name)s, %(education)s, %(experience)s, %(email)s, %(phone)s, %(password)s, %(birth_date)s, %(information)s,%(picture)s);"
+        return connectToMySQL(cls.db_name).query_db(query,data)
 
-#     @classmethod
-#     def get_user_email(cls ,data):
-#         query="SELECT * FROM users WHERE email=%(email)s"
-#         result = connectToMySQL('tv_shows').query_db(query ,data)
-#         if len(result)<1:
-#             return False
-#         return cls(result[0])
 
-#     @classmethod
-#     def get_user_id(cls ,data):
-#         query="SELECT * FROM users WHERE id=%(id)s"
-#         result = connectToMySQL('tv_shows').query_db(query ,data)
+    # GET ONE USER BY EMAIL
+    @classmethod
+    def get_user_by_email(cls, data):
+        query = "SELECT * FROM users WHERE email = %(email)s;"
+        result = connectToMySQL(cls.db_name).query_db(query, data)
+
+        if result:
+            return cls(result[0])
+        return False
+
+    @classmethod
+    def get_user_id(cls ,data):
+        query="SELECT * FROM users WHERE id = %(id)s"
+        result = connectToMySQL(cls.db_name).query_db(query ,data)
  
-#         return cls(result[0])
+        return cls(result[0])
 
 
 

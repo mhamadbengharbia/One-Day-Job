@@ -1,16 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=h1, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/style.css') }}"
-    />
-    <title>User Register</title>
-  </head>
-  <body>
-    <h1>User Register</h1>
-  </body>
-</html>
+{% extends 'template.html' %} {% block title %} User Register{% endblock %} {%
+block content %}
+<div class="container mt-5">
+  <h1>User Register</h1>
+  <!-- REGISTER FORM -->
+  <div
+    class="bg-dark p-5 text-white m"
+    style="max-width: 20rem; min-width: 25rem"
+  >
+    <form action="/add_user" method="post">
+      <h1>Register</h1>
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %} {% for category, message in messages %}
+      <div class="alert alert-danger">
+        <p>{{ message }}</p>
+      </div>
+      {% endfor %} {% endif %} {% endwith %}
+      <div>
+        <label for="" class="form-label">First Name:</label>
+        <input class="form-control" type="text" name="first_name" />
+      </div>
+      <div>
+        <label for="" class="form-label">last Name:</label>
+        <input class="form-control" type="text" name="last_name" />
+      </div>
+      <div>
+        <label for="" class="form-label">Email:</label>
+        <input class="form-control" type="text" name="email" />
+      </div>
+      <div>
+        <label for="" class="form-label">Education:</label>
+        <input class="form-control" type="text" name="education" />
+      </div>
+      <div>
+        <label for="" class="form-label">Experience:</label>
+        <input class="form-control" type="text" name="experience" />
+      </div>
+      <div>
+        <label for="" class="form-label">Picture:</label>
+        <input type="file" name="picture" id="" />
+      </div>
+      <div>
+        <label for="" class="form-label">Information:</label>
+        <input class="form-control" type="text" name="information" />
+      </div>
+      <div>
+        <label for="" class="form-label">Phone:</label>
+        <input class="form-control" type="number" name="phone" />
+      </div>
+      <div>
+        <label for="" class="form-label">Birthday:</label>
+        <input class="form-control" type="date" name="birth_date" />
+      </div>
+      <div>
+        <label for="" class="form-label">Password:</label>
+        <input class="form-control" type="password" name="password" />
+      </div>
+      <div>
+        <label for="" class="form-label">Confirm Password:</label>
+        <input class="form-control" type="password" name="confirm_password" />
+      </div>
+
+      <input type="submit" value="Register" class="btn btn-primary mt-3" />
+    </form>
+  </div>
+</div>
+{% endblock %}
