@@ -41,3 +41,22 @@ def update_job():
 @app.route('/jobs')
 def all_jobs():
       return render_template('all_jobs.html')
+
+
+
+
+
+
+ 
+
+# @app.route('/login',methods=['POST'])
+# def login():
+#     user = User.get_user_email(request.form)
+#     if not user:
+#         flash("Email not valid","login")
+#         return redirect('/')
+#     if not bcrypt.check_password_hash(user.password, request.form['password']):
+#         flash("Password not valid","login")
+#         return redirect('/')
+#     session['user_id'] = user.id
+#     return redirect('/dashboard')

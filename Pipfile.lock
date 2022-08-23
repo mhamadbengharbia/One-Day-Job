@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "ad1404cf0e8cded3df1ee2ca4d4f444f5c12a540fcc9d02ee78c1fba33729462"
+            "sha256": "56a193389af4e80419389b776c70f29c2e44b68648272be6a081d7f774253c7c"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -117,13 +117,6 @@
             ],
             "markers": "platform_system == 'Windows'",
             "version": "==0.4.5"
-        },
-        "flash": {
-            "hashes": [
-                "sha256:69f448811abc97d4f0857fc577e14398b322ceddad074430350a5012a61302b2"
-            ],
-            "index": "pypi",
-            "version": "==1.0.3"
         },
         "flask": {
             "hashes": [

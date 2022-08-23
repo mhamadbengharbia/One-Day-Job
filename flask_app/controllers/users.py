@@ -1,6 +1,8 @@
-from flask import session,render_template,redirect,request
+from flask import render_template,redirect,session,request, flash
 from flask_app import app
- 
+from flask_app.models.user import User
+from flask_bcrypt import Bcrypt
+bcrypt = Bcrypt(app)
 # HOME PAGE
 @app.route('/')
 def index():
@@ -40,3 +42,22 @@ def user_profile(id):
 @app.route('/update_user_profile/<int:id>')
 def update_user_profile(id):
       return render_template('update_user_profile.html')
+
+
+
+# @app.route("/logout")
+# def logout():
+#     session.clear()
+#     return redirect("/")
+
+# @app.route('/login',methods=['POST'])
+# def login():
+#     user = User.get_user_email(request.form)
+#     if not user:
+#         flash("Email not valid","login")
+#         return redirect('/')
+#     if not bcrypt.check_password_hash(user.password, request.form['password']):
+#         flash("Password not valid","login")
+#         return redirect('/')
+#     session['user_id'] = user.id
+#     return redirect('/dashboard')
