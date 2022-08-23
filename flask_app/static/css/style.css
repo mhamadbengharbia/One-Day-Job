@@ -1,0 +1,45 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#logo {
+  width: 10%;
+}
+.navbar {
+  display: flex;
+  justify-content: space-evenly;
+}
+.left_nav {
+  display: flex;
+  gap: 40px;
+}
+.social_media {
+  display: flex;
+  gap: 10px;
+}
+.logins {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+.links a {
+  text-decoration: none;
+  font-family: sans-serif;
+  color: #01aded;
+  font-weight: 600;
+}
+.links a:hover {
+  text-decoration: none;
+  font-family: sans-serif;
+  color: #1b6eae;
+  font-weight: 600;
+}
+#logo2 {
+  width: 40%;
+}
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}

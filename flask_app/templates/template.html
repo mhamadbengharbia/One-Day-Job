@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock %} </title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link rel="icon" type="image/x-icon" href="../static/img/logo (1).ico" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-light bg-light">
+        <div class="left_nav">
+          <div class="social_media">
+            <img src="../static/img/facebook.svg" alt="" />
+            <img src="../static/img/linkedin.svg" alt="" />
+            <img src="../static/img/envelope-fill.svg" alt="" />
+          </div>
+          <div class="links">
+            <a href="/" class="link-dark">Home</a>
+            <a href="/about" class="link-dark">About</a>
+            <a href="/contact" class="link-dark">Contact</a>
+          </div>
+        </div>
+        <img src="../static/img/logo.png" alt="" id="logo" />
+        <!-- search button -->
+        <div class="logins">
+          <form action="">
+            <input type="text" value="search" class="form-control" />
+          </form>
+          <a href="/login" class="btn btn-primary">Login</a>
+          <a href="/register" class="btn btn-dark">Register</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- START SECTION -->
+      {% block content %}{% endblock %}
+    <!-- END SECTION -->
+
+    <footer class="text-center text-lg-start bg-light text-muted">
+      <section
+        class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
+      ></section>
+
+      <section class="">
+        <div class="container text-center text-md-start mt-5">
+          <div class="row mt-3">
+            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+              <h6 class="text-uppercase fw-bold mb-4">
+                <img src="../static/img/logo.png" alt="" id="logo2" />
+              </h6>
+              <p>
+                One Day Job connects job seekers with employment opportunities
+                across Tunisia.
+              </p>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+              <h6 class="text-uppercase fw-bold mb-4">Company</h6>
+              <p>
+                <a href="/add_job" class="text-reset">Add job offer</a>
+              </p>
+              <p>
+                <a href="/job_seekers" class="text-reset">Find a job seeker</a>
+              </p>
+            </div>
+
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+              <h6 class="text-uppercase fw-bold mb-4">Job Seeker</h6>
+              <p>
+                <a href="/user_profile" class="text-reset">My profile</a>
+              </p>
+              <p>
+                <a href="/jobs" class="text-reset">Find a job</a>
+              </p>
+            </div>
+ 
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+   
+              <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+              <p>
+                <i class="fas fa-envelope me-3"></i>
+                Onedayjob@contact.tn
+              </p>
+              <p><i class="fas fa-phone me-3"></i> + 216 21 420 848</p>
+              <p><i class="fas fa-print me-3"></i> + 216 56 929 349</p>
+            </div>
+          </div>
+        </div>
+      <div
+        class="text-center p-4"
+        style="background-color: rgba(0, 0, 0, 0.05)"
+      >
+        © 2022 Copyright:
+        <a class="text-reset fw-bold" href="https://mdbootstrap.com/"
+          >onedayjob.tn</a
+        >
+      </div>
+    </footer>
+  </body>
+</html>
