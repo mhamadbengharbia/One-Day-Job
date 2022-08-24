@@ -9,8 +9,8 @@ block content %}
   >
     <form action="/add_user" method="post">
       <h1>Register</h1>
-      {% with messages = get_flashed_messages(with_categories=true) %} {% if
-      messages %} {% for category, message in messages %}
+      {% with messages = get_flashed_messages(category_filter=["register"]) %}
+      {% if messages %} {% for message in messages %}
       <div class="alert alert-danger">
         <p>{{ message }}</p>
       </div>
@@ -34,6 +34,12 @@ block content %}
       <div>
         <label for="" class="form-label">Experience:</label>
         <input class="form-control" type="text" name="experience" />
+      </div>
+      <div>
+        <label for="" class="form-label">Address:</label>
+        <select name="address_id" id="" class="form-control">
+          <option value="1">Tunis</option>
+        </select>
       </div>
       <div>
         <label for="" class="form-label">Picture:</label>

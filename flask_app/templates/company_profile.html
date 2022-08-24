@@ -1,12 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Company Profile</title>
-  </head>
-  <body>
-    <h1>Company Profile</h1>
-  </body>
-</html>
+{% extends 'template.html' %} {% block title %} Company Profile{% endblock %} {%
+block content %}
+<h1>{{ logged_company.company }}</h1>
+<p>Email: {{ logged_company.email }}</p>
+<p>Phone: {{ logged_company.phone }}</p>
+<p>Web Site: {{ logged_company.web_site }}</p>
+<p>Unique ID: {{ logged_company.unique_identfier }}</p>
+<p>Activite Area: {{ logged_company.activite_area }}</p>
+<p>Description: {{ logged_company.description }}</p>
+{% if logged_company.id == logged_company %}
+<a href="/">Edit Profile</a> |
+<a href="/company_dashboard/{{ logged_company.id }}">Back to dashboard</a>
+{% endif %} {% endblock %}

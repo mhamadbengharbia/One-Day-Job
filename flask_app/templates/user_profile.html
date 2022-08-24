@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>User Profile</title>
-  </head>
-  <body>
-    <h1>User Profile</h1>
-  </body>
-</html>
+{% extends 'template.html' %} {% block title %} user Dashboard{% endblock %} {%
+block content %}
+<p>Name: {{ logged_user.first_name }} {{ logged_user.last_name }}</p>
+<p>Email: {{ logged_user.email }}</p>
+<p>Phone: {{ logged_user.phone }}</p>
+<p>Experience: {{ logged_user.experience }}</p>
+<p>Education: {{ logged_user.education }}</p>
+<p>Birthday: {{ logged_user.birth_date }}</p>
+{% if logged_user.id == session['uuid'] %}
+<a href="/">Edit Profile</a> |
+<a href="/user_dashboard/{{ logged_user.id }}">Back to dashboard</a>
+{% endif %} {% endblock %}

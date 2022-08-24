@@ -7,7 +7,8 @@ class User():
     db_name = 'project_schema'
     def __init__(self ,data):
             self.id=data['id']
-            # self.type=data['type']
+            self.type=data['type']
+            self.address_id=data['address_id']
             self.first_name=data['first_name']
             self.last_name=data['last_name']
             self.education=data['education']
@@ -24,7 +25,7 @@ class User():
 
     @classmethod
     def add_user(cls ,data):
-        query="INSERT INTO users (first_name, last_name, education, experience, email, phone, password, birth_date, information, picture) Values ( %(first_name)s, %(last_name)s, %(education)s, %(experience)s, %(email)s, %(phone)s, %(password)s, %(birth_date)s, %(information)s,%(picture)s);"
+        query="INSERT INTO users (first_name, last_name, education, experience, email, phone, password, birth_date, information, picture, address_id) Values ( %(first_name)s, %(last_name)s, %(education)s, %(experience)s, %(email)s, %(phone)s, %(password)s, %(birth_date)s, %(information)s,%(picture)s, %(address_id)s);"
         return connectToMySQL(cls.db_name).query_db(query,data)
 
 
@@ -37,13 +38,32 @@ class User():
         if result:
             return cls(result[0])
         return False
-
+    
+    # GET ONE USER BY ID
     @classmethod
     def get_user_id(cls ,data):
         query="SELECT * FROM users WHERE id = %(id)s"
         result = connectToMySQL(cls.db_name).query_db(query ,data)
  
         return cls(result[0])
+    
+    # GET ALL USERS
+    @classmethod
+    def get_all_users(cls):
+        query="SELECT * FROM users WHERE type != 1;"
+        result = connectToMySQL(cls.db_name).query_db(query)
+ 
+        all_users = []
+        for row in result:
+            all_users.append(cls(row))
+        
+        return all_users
+
+    # DELETE USER
+    @classmethod
+    def delete_user(cls, data):
+        query="DELETE FROM users WHERE id = %(id)s;"
+        return connectToMySQL(cls.db_name).query_db(query, data)
 
 
 

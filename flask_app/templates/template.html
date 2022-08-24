@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %}{% endblock %} </title>
+    <title>{% block title %}{% endblock %}</title>
 
     <link
       rel="stylesheet"
@@ -16,6 +16,11 @@
       rel="stylesheet"
       type="text/css"
       href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/style_dashboard.css') }}"
     />
     <link rel="icon" type="image/x-icon" href="../static/img/logo (1).ico" />
   </head>
@@ -40,17 +45,21 @@
           <form action="">
             <input type="text" value="search" class="form-control" />
           </form>
+          {% if session['uuid'] %}
+          <a href="/logout" class="btn btn-dark">Logout</a>
+          {% else %}
           <a href="/login" class="btn btn-primary">Login</a>
           <a href="/register" class="btn btn-dark">Register</a>
+          {% endif %}
         </div>
       </nav>
     </header>
 
     <!-- START SECTION -->
-      {% block content %}{% endblock %}
+    {% block content %}{% endblock %}
     <!-- END SECTION -->
 
-    <footer class="text-center text-lg-start bg-light text-muted">
+    <!-- <footer class="text-center text-lg-start bg-light text-muted">
       <section
         class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
       ></section>
@@ -106,6 +115,6 @@
         © 2022 all rights reserved onedayjob.tn
         
       </div>
-    </footer>
+    </footer> -->
   </body>
 </html>

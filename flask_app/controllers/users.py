@@ -1,6 +1,7 @@
 from flask import render_template,redirect,session,request, flash
 from flask_app import app
 from flask_app.models import user
+from flask_app.models import company
 from flask_bcrypt import Bcrypt
 
 bcrypt = Bcrypt(app)
@@ -15,11 +16,6 @@ def index():
 @app.route('/about')
 def about():
       return render_template("about.html")
-
-# CONTACT PAGE
-@app.route('/contact')
-def contact():
-      return render_template("contact.html")
 
 # LOGIN TYPE
 @app.route('/login')
@@ -41,19 +37,39 @@ def user_register():
 def user_login():
       return render_template("user_login.html")
 
+# ADMIN DASHBOARD
+@app.route('/admin_dashboard/<int:id>')
+def admin_dashboard(id):
+      if not session.get('uuid'):
+        return redirect('/login')
+      logged_user = user.User.get_user_id({"id": session['uuid']})
+      if logged_user.type != 1:
+            return redirect('/') # TODO ADD PAGE NOT FOUND TEMPLATE
+      # GET ALL COMPANIES
+      all_companies = company.Company.get_all_companies()
+      # GET ALL USERS EXCEPT ADMINS
+      all_users = user.User.get_all_users()
+      return render_template('admin_dashboard.html', logged_user=logged_user, all_companies=all_companies, all_users=all_users)
+
 # USER DASHBOARD
 @app.route('/user_dashboard/<int:id>')
 def user_dashboard(id):
+      if not session.get('uuid'):
+        return redirect('/login')
       return render_template('user_dashboard.html', logged_user=user.User.get_user_id({"id": session['uuid']}))
 
 # USER PROFILE
 @app.route('/user_profile/<int:id>')
 def user_profile(id):
-      return render_template('user_profile.html')
+      if not session.get('uuid'):
+        return redirect('/login')
+      return render_template('user_profile.html', logged_user=user.User.get_user_id({"id": id}))
 
 # USER UPDATE PROFILE
 @app.route('/update_user_profile/<int:id>')
 def update_user_profile(id):
+      if not session.get('uuid'):
+        return redirect('/login')
       return render_template('update_user_profile.html')
 
 
@@ -84,10 +100,35 @@ def login_user():
         return redirect('/user_login')
     
     session['uuid'] = selected_user.id
+
+    if selected_user.type == 1:
+      return redirect(f"/admin_dashboard/{session['uuid']}")
     
     return redirect(f"/user_dashboard/{session['uuid']}")
 
-# @app.route("/logout")
-# def logout():
-#     session.clear()
-#     return redirect("/")
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect("/")
+
+# DELETE COMPANY
+@app.route("/delete_company/<int:id>")
+def delete_company(id):
+      logged_user=user.User.get_user_id({"id": session['uuid']})
+      if logged_user.type != 1:
+            return redirect('/not_found.html') # TODO CREATE not_found..html PAGE
+
+      company.Company.delete_company({"id": id})
+
+      return redirect(f"/admin_dashboard/{session['uuid']}")
+
+# DELETE USER
+@app.route("/delete_user/<int:id>")
+def delete_user(id):
+      logged_user=user.User.get_user_id({"id": session['uuid']})
+      if logged_user.type != 1:
+            return redirect('/not_found.html') # TODO CREATE not_found..html PAGE
+
+      user.User.delete_user({"id": id})
+
+      return redirect(f"/admin_dashboard/{session['uuid']}")

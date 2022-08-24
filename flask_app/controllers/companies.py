@@ -1,4 +1,4 @@
-from flask import session,render_template,redirect,request
+from flask import session,render_template,redirect,request, flash
 from flask_app import app
 from flask_app.models import company
 from flask_bcrypt import Bcrypt
@@ -19,26 +19,36 @@ def company_login():
 # COMPANY DASHBOARD
 @app.route('/company_dashboard/<int:id>')
 def company_dashboard(id):
-      return render_template('company_dashboard.html')
+      if not session.get('uuid'):
+        return redirect('/login')
+      return render_template('company_dashboard.html', logged_company=company.Company.get_company_id({"id": session['uuid']}))
 
 # COMPANY PROFILE
 @app.route('/company_profile/<int:id>')
 def company_profile(id):
-      return render_template('company_profile.html')
+      if not session.get('uuid'):
+        return redirect('/login')
+      return render_template('company_profile.html', logged_company=company.Company.get_company_id({"id": id}))
 
 # COMPANY UPDATE PROFILE
 @app.route('/update_company_profile/<int:id>')
 def update_company_profile(id):
+      if not session.get('uuid'):
+        return redirect('/login')
       return render_template('update_company_profile.html')
 
 # COMPANY ADD JOB
 @app.route('/company/add_job')
 def add_job():
+      if not session.get('uuid'):
+        return redirect('/login')
       return render_template('add_job.html')
 
 # COMPANY UPDATE JOB
 @app.route('/company/update_job')
 def update_job():
+      if not session.get('uuid'):
+        return redirect('/login')
       return render_template('update_job.html')
 
 # ALL JOBS
@@ -51,29 +61,28 @@ def all_jobs():
 @app.route('/add_company', methods=['POST'])
 def add_company():
     # CHECK IF INPUTS NOT VALIDE REDIRECT TO THE ROOT
-#     if not company.Company.validate_user_register(request.form):
-#         return redirect('/user_register')
+    if not company.Company.validate_company_register(request.form):
+        return redirect('/company_register')
     # IF INPUTS VALID
     # HASH THE PASSWORD & CONFIRM PASSWORD
     hash_pass = bcrypt.generate_password_hash(request.form['password'])
 
     company.Company.add_company({**request.form, 'password': hash_pass})
 
-    return redirect('/user_login')
+    return redirect('/company_login')
 
+# Company  LOGIN
+@app.route('/login_company', methods=['POST'])
+def login_company():
+    selected_company = company.Company.get_company_by_email(request.form)
+    if not selected_company:
+        flash("Invalid Email / Password ", 'login')
+        return redirect('/user_login')
+    if not bcrypt.check_password_hash(selected_company.password, request.form['password']):
+        flash("Invalid Email / Password ", 'login')
+        return redirect('/user_login')
+    
+    session['uuid'] = selected_company.id
+    
+    return redirect(f"/company_dashboard/{session['uuid']}") 
 
-
-
- 
-
-# @app.route('/login',methods=['POST'])
-# def login():
-#     user = User.get_user_email(request.form)
-#     if not user:
-#         flash("Email not valid","login")
-#         return redirect('/')
-#     if not bcrypt.check_password_hash(user.password, request.form['password']):
-#         flash("Password not valid","login")
-#         return redirect('/')
-#     session['user_id'] = user.id
-#     return redirect('/dashboard')
