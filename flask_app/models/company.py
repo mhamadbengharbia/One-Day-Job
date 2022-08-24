@@ -3,7 +3,7 @@ import re
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 from flask import flash
 
-class User():
+class Company():
     def __init__(self ,data):
             self.id=data['id']
             self.company=data['company']
@@ -17,6 +17,11 @@ class User():
             self.activite_area=data['activite_area']
             self.created_at=data['created_at']
             self.updated_at=data['updated_at']
+
+    @classmethod
+    def add_company(cls ,data):
+        query="INSERT INTO companies (company, email, phone, web_site, password, logo, description, unique_identifier, activite_area) Values ( %(company)s, %(email)s, %(phone)s, %(web_site)s, %(password)s, %(logo)s, %(description)s, %(unique_identifier)s, %(activite_area)s);"
+        return connectToMySQL(cls.db_name).query_db(query,data)
 
             
     #  @classmethod

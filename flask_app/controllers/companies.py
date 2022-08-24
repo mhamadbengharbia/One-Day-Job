@@ -1,5 +1,9 @@
 from flask import session,render_template,redirect,request
 from flask_app import app
+from flask_app.models import company
+from flask_bcrypt import Bcrypt
+
+bcrypt = Bcrypt(app)
  
 
 # COMPANY REGISTER
@@ -43,6 +47,19 @@ def all_jobs():
       return render_template('all_jobs.html')
 
 
+# CREATE NEW COMPANY ROUTE
+@app.route('/add_company', methods=['POST'])
+def add_company():
+    # CHECK IF INPUTS NOT VALIDE REDIRECT TO THE ROOT
+#     if not company.Company.validate_user_register(request.form):
+#         return redirect('/user_register')
+    # IF INPUTS VALID
+    # HASH THE PASSWORD & CONFIRM PASSWORD
+    hash_pass = bcrypt.generate_password_hash(request.form['password'])
+
+    company.Company.add_company({**request.form, 'password': hash_pass})
+
+    return redirect('/user_login')
 
 
 

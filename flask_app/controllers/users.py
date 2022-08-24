@@ -2,7 +2,10 @@ from flask import render_template,redirect,session,request, flash
 from flask_app import app
 from flask_app.models import user
 from flask_bcrypt import Bcrypt
+
 bcrypt = Bcrypt(app)
+
+
 # HOME PAGE
 @app.route('/')
 def index():
@@ -59,8 +62,8 @@ def update_user_profile(id):
 @app.route('/add_user', methods=['POST'])
 def add_user():
     # CHECK IF INPUTS NOT VALIDE REDIRECT TO THE ROOT
-#     if not user.User.form_validation(request.form):
-#         return redirect('/')
+    if not user.User.validate_user_register(request.form):
+        return redirect('/user_register')
     # IF INPUTS VALID
     # HASH THE PASSWORD & CONFIRM PASSWORD
     hash_pass = bcrypt.generate_password_hash(request.form['password'])
