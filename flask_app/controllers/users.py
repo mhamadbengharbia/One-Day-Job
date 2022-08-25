@@ -47,9 +47,29 @@ def admin_dashboard(id):
             return redirect('/') # TODO ADD PAGE NOT FOUND TEMPLATE
       # GET ALL COMPANIES
       all_companies = company.Company.get_all_companies()
+     
+      return render_template('admin_dashboard.html', logged_user=logged_user, all_companies=all_companies)
+
+# DISPLAY ALL COMPANIES
+@app.route('/display_companies')
+def display_companies():
+      logged_user = user.User.get_user_id({"id": session['uuid']})
+      if logged_user.type != 1:
+            return redirect('/') # TODO ADD PAGE NOT FOUND TEMPLATE
+      # GET ALL COMPANIES
+      all_companies = company.Company.get_all_companies()
+      return render_template('admin_dashboard.html', logged_user=logged_user, all_companies=all_companies)
+
+# DISPLAY ALL USERS
+@app.route('/display_users')
+def display_users():
+      logged_user = user.User.get_user_id({"id": session['uuid']})
+      if logged_user.type != 1:
+            return redirect('/') # TODO ADD PAGE NOT FOUND TEMPLATE
+
       # GET ALL USERS EXCEPT ADMINS
       all_users = user.User.get_all_users()
-      return render_template('admin_dashboard.html', logged_user=logged_user, all_companies=all_companies, all_users=all_users)
+      return render_template('admin_dashboard.html', logged_user=logged_user, all_users=all_users)
 
 # USER DASHBOARD
 @app.route('/user_dashboard/<int:id>')
@@ -127,7 +147,7 @@ def delete_company(id):
 def delete_user(id):
       logged_user=user.User.get_user_id({"id": session['uuid']})
       if logged_user.type != 1:
-            return redirect('/not_found.html') # TODO CREATE not_found..html PAGE
+            return redirect('/not_found.html') # TODO CREATE not_found.html PAGE
 
       user.User.delete_user({"id": id})
 
