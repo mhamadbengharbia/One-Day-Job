@@ -17,11 +17,7 @@
       type="text/css"
       href="{{ url_for('static', filename='css/style.css') }}"
     />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{ url_for('static', filename='css/style_dashboard.css') }}"
-    />
+    
     <link rel="icon" type="image/x-icon" href="../static/img/logo (1).ico" />
   </head>
   <body>
@@ -59,7 +55,7 @@
     {% block content %}{% endblock %}
     <!-- END SECTION -->
 
-    <!-- <footer class="text-center text-lg-start bg-light text-muted">
+    <footer class="text-center text-lg-start bg-light text-muted">
       <section
         class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
       ></section>
@@ -115,6 +111,6 @@
         © 2022 all rights reserved onedayjob.tn
         
       </div>
-    </footer> -->
+    </footer>
   </body>
 </html>

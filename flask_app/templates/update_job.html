@@ -1,12 +1,110 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Update Job</title>
-  </head>
-  <body>
-    <h1>Update Job</h1>
-  </body>
-</html>
+{% extends 'template.html' %} {% block title %}Update a job{% endblock %} {%
+block content %}
+
+<div class="container register">
+  <div class="reg_left">
+    <h4>Update job</h4>
+    <p>Using OBJ will help you to find best talents</p>
+    <p>
+      Receive alerts for the best Talents using advanced filters and to add a
+      jobs opportunity so you can hire the best for your company
+    </p>
+    <p>You can connect via social media</p>
+    <div class="socialicons">
+      <img
+        class="socialicons"
+        src="../static/img/facebook.svg"
+        alt="facebook"
+        srcset=""
+      />
+      <img
+        class="socialicons"
+        src="../static/img/linkedin.svg"
+        alt="linkedin"
+        srcset=""
+      />
+      <img
+        class="socialicons"
+        src="../static/img/envelope-fill.svg"
+        alt="envelope"
+        srcset=""
+      />
+    </div>
+    <p>Talents looking for jobs</p>
+    <p>
+      if you represente a company or organization and want to hire, just add a job via this formulaire
+    </p>
+  </div>
+  <div class="reg_right">
+    <div class="Who_are_you">
+      
+    <form action="/edit_job/{{ sellected_job.id }}" method="post" class="form-group row the_register_form">
+
+ 
+  <div class="row">
+    <div class="col">
+      <input name="title" type="text" class="form-control" value="{{ sellected_job.title }}">
+    </div>
+    <div class="col">
+      <input name="salary" type="number" class="form-control"  value="{{ sellected_job.salary }}">
+    </div>
+  </div>
+  
+<div class="date_input"> 
+     <input class="form-control" type="date" name="end_at" id="" value="{{ sellected_job.end_at }}">
+     
+  </div> 
+ 
+ 
+     <div class=" date_input"> 
+ <select name="industry" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+    <option selected>Job type...</option>
+    <option value="1">IT</option>
+  </select> 
+ </div>
+ 
+ <div class=" date_input"> 
+ 
+ <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref"  value="">
+    <option selected>City</option>
+    <option value="1">Tunis</option>
+  </select>     
+</div>
+  <div class="row"> 
+    <div class="col">
+      <textarea name="experience" id="" cols="100%" rows="auto" class="form-control">{{ sellected_job.experience }}</textarea>
+    </div>
+  </div>
+    <div class="row"> 
+    <div class="col">
+      <textarea name="description" id="" cols="100%" rows="auto" class="form-control">{{ sellected_job.description }}</textarea>
+    </div>
+  </div>
+ 
+
+
+<div class="row  "> 
+    <div class="col">
+      <input name="accept" type="checkbox"   >
+      <label for=""> I accept all conditions    </label>    </div>
+
+    </div>
+    <div> 
+    <label for=""> <a href="/conditions">   Privacy & conditions</a></label>   
+  
+  </div>
+<div class="row date_input"> 
+
+<div class="col">
+ <button class="btn btn-primary">Update</button>  
+    </div>
+  
+  </div>
+  </form>
+  </div>
+ 
+  </div>
+ 
+  </div>
+</div>
+{% endblock %}

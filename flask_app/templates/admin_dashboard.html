@@ -1,156 +1,197 @@
-{% extends 'template.html' %} {% block title %} Admin Dashboard{% endblock %} {%
-block content %}
-<header>
-  <!-- Sidebar -->
-  <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
-    <div class="position-sticky">
-      <div class="list-group list-group-flush mx-3 mt-4">
-        <a
-          href="/admin_dashboard"
-          class="list-group-item list-group-item-action py-2 ripple"
-          aria-current="true"
-        >
-          <i class="fas fa-tachometer-alt fa-fw me-3"></i
-          ><span>{{ logged_user.first_name }} dashboard</span>
-        </a>
-        <a
-          href="/display_companies"
-          class="list-group-item list-group-item-action py-2 ripple active"
-        >
-          <i class="fas fa-chart-area fa-fw me-3"></i><span>Companies</span>
-        </a>
-        <a
-          href="/display_users"
-          class="list-group-item list-group-item-action py-2 ripple"
-          ><i class="fas fa-lock fa-fw me-3"></i><span>Users</span></a
-        >
-        <a href="#" class="list-group-item list-group-item-action py-2 ripple"
-          ><i class="fas fa-chart-line fa-fw me-3"></i
-          ><span>All Job offers</span></a
-        >
-        <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-          <i class="fas fa-chart-pie fa-fw me-3"></i
-          ><span>Accepted Job offers</span>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action py-2 ripple"
-          ><i class="fas fa-chart-bar fa-fw me-3"></i
-          ><span>Refused Job offers</span></a
-        >
-        <a href="#" class="list-group-item list-group-item-action py-2 ripple"
-          ><i class="fas fa-globe fa-fw me-3"></i
-          ><span>Pending Job offers</span></a
-        >
-      </div>
-    </div>
-  </nav>
-  <!-- Sidebar -->
-
-  <!-- Navbar -->
-  <nav
-    id="main-navbar"
-    class="navbar navbar-expand-lg navbar-light bg-white fixed-top"
-  >
-    <!-- Container wrapper -->
-    <div class="container-fluid">
-      <!-- Toggle button -->
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-mdb-toggle="collapse"
-        data-mdb-target="#sidebarMenu"
-        aria-controls="sidebarMenu"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Company Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/style_dashboard.css') }}"
+    />
+    <link rel="icon" type="image/x-icon" href="../static/img/logo (1).ico" />
+  </head>
+  <body>
+    <header>
+      <!-- Sidebar -->
+      <nav
+        id="sidebarMenu"
+        class="collapse d-lg-block sidebar collapse bg-white"
       >
-        <div class="list-group list-group-flush mx-3 mt-4">
-          <a
-            href="/admin_dashboard"
-            class="list-group-item list-group-item-action py-2 ripple"
-            aria-current="true"
+        <div class="position-sticky">
+          <div class="list-group list-group-flush mx-3 mt-4">
+            <a
+              href="/admin_dashboard"
+              class="list-group-item list-group-item-action py-2 ripple"
+              aria-current="true"
+            >
+              <i class="fas fa-tachometer-alt fa-fw me-3"></i
+              ><span>{{ logged_user.first_name }} dashboard</span>
+            </a>
+            <a
+              href="/display_companies"
+              class="list-group-item list-group-item-action py-2 ripple active"
+            >
+              <i class="fas fa-chart-area fa-fw me-3"></i><span>Companies</span>
+            </a>
+            <a
+              href="/display_users"
+              class="list-group-item list-group-item-action py-2 ripple"
+              ><i class="fas fa-lock fa-fw me-3"></i><span>Users</span></a
+            >
+            <a
+              href="#"
+              class="list-group-item list-group-item-action py-2 ripple"
+              ><i class="fas fa-chart-line fa-fw me-3"></i
+              ><span>All Job offers</span></a
+            >
+            <a
+              href="#"
+              class="list-group-item list-group-item-action py-2 ripple"
+            >
+              <i class="fas fa-chart-pie fa-fw me-3"></i
+              ><span>Accepted Job offers</span>
+            </a>
+            <a
+              href="#"
+              class="list-group-item list-group-item-action py-2 ripple"
+              ><i class="fas fa-chart-bar fa-fw me-3"></i
+              ><span>Refused Job offers</span></a
+            >
+            <a
+              href="#"
+              class="list-group-item list-group-item-action py-2 ripple"
+              ><i class="fas fa-globe fa-fw me-3"></i
+              ><span>Pending Job offers</span></a
+            >
+          </div>
+        </div>
+      </nav>
+      <!-- Sidebar -->
+
+      <!-- Navbar -->
+      <nav
+        id="main-navbar"
+        class="navbar navbar-expand-lg navbar-light bg-white fixed-top"
+      >
+        <!-- Container wrapper -->
+        <div class="container-fluid">
+          <!-- Toggle button -->
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-mdb-toggle="collapse"
+            data-mdb-target="#sidebarMenu"
+            aria-controls="sidebarMenu"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
           >
-            <i class="fas fa-tachometer-alt fa-fw me-3"></i
-            ><span>Main dashboard</span>
+            <div class="list-group list-group-flush mx-3 mt-4">
+              <a
+                href="/admin_dashboard"
+                class="list-group-item list-group-item-action py-2 ripple"
+                aria-current="true"
+              >
+                <i class="fas fa-tachometer-alt fa-fw me-3"></i
+                ><span>Main dashboard</span>
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action py-2 ripple active"
+              >
+                <i class="fas fa-chart-area fa-fw me-3"></i
+                ><span>Companies</span>
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action py-2 ripple"
+                ><i class="fas fa-lock fa-fw me-3"></i><span>Users</span></a
+              >
+              <a
+                href="#"
+                class="list-group-item list-group-item-action py-2 ripple"
+                ><i class="fas fa-chart-line fa-fw me-3"></i
+                ><span>All Job offers</span></a
+              >
+              <a
+                href="#"
+                class="list-group-item list-group-item-action py-2 ripple"
+              >
+                <i class="fas fa-chart-pie fa-fw me-3"></i
+                ><span>Accepted Job offers</span>
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action py-2 ripple"
+                ><i class="fas fa-chart-bar fa-fw me-3"></i
+                ><span>Refused Job offers</span></a
+              >
+              <a
+                href="#"
+                class="list-group-item list-group-item-action py-2 ripple"
+                ><i class="fas fa-globe fa-fw me-3"></i
+                ><span>Pending Job offers</span></a
+              >
+            </div>
+          </button>
+
+          <!-- Brand -->
+          <a class="navbar-brand" href="#">
+            <img
+              src="../static/img/logo.png"
+              height="40"
+              alt="ODJ Logo"
+              loading="lazy"
+            />
           </a>
-          <a
-            href="#"
-            class="list-group-item list-group-item-action py-2 ripple active"
+
+          <!-- Avatar -->
+
+          <ul class="logout">
+            <a href="/logout" class="btn btn-dark">Logout</a>
+          </ul>
+        </div>
+        <!-- Container wrapper -->
+      </nav>
+      <!-- Navbar -->
+    </header>
+    <!--Main Navigation-->
+
+    <!--Main layout-->
+    <main style="margin-top: 58px">
+      <div class="container pt-4">
+        {% if all_companies|length > 0 %}
+        <h2>All Companies</h2>
+        {% for company in all_companies %}
+        <div>
+          <p>Name: {{ company.company }}</p>
+          <a href="/company_profile/{{ company.id }}" class="btn btn-info"
+            >Details</a
           >
-            <i class="fas fa-chart-area fa-fw me-3"></i><span>Companies</span>
-          </a>
-          <a href="#" class="list-group-item list-group-item-action py-2 ripple"
-            ><i class="fas fa-lock fa-fw me-3"></i><span>Users</span></a
-          >
-          <a href="#" class="list-group-item list-group-item-action py-2 ripple"
-            ><i class="fas fa-chart-line fa-fw me-3"></i
-            ><span>All Job offers</span></a
-          >
-          <a
-            href="#"
-            class="list-group-item list-group-item-action py-2 ripple"
-          >
-            <i class="fas fa-chart-pie fa-fw me-3"></i
-            ><span>Accepted Job offers</span>
-          </a>
-          <a href="#" class="list-group-item list-group-item-action py-2 ripple"
-            ><i class="fas fa-chart-bar fa-fw me-3"></i
-            ><span>Refused Job offers</span></a
-          >
-          <a href="#" class="list-group-item list-group-item-action py-2 ripple"
-            ><i class="fas fa-globe fa-fw me-3"></i
-            ><span>Pending Job offers</span></a
+          <a href="/delete_company/{{ company.id }}" class="btn btn-danger"
+            >Delete</a
           >
         </div>
-      </button>
-
-      <!-- Brand -->
-      <a class="navbar-brand" href="#">
-        <img
-          src="../static/img/logo.png"
-          height="40"
-          alt="ODJ Logo"
-          loading="lazy"
-        />
-      </a>
-
-      <!-- Avatar -->
-
-      <ul class="logout">
-        <a href="/logout" class="btn btn-dark">Logout</a>
-      </ul>
-    </div>
-    <!-- Container wrapper -->
-  </nav>
-  <!-- Navbar -->
-</header>
-<!--Main Navigation-->
-
-<!--Main layout-->
-<main style="margin-top: 58px">
-  <div class="container pt-4">
-    {% if all_companies|length > 0 %}
-    <h2>All Companies</h2>
-    {% for company in all_companies %}
-    <div>
-      <p>Name: {{ company.company }}</p>
-      <a href="/company_profile/{{ company.id }}" class="btn btn-info"
-        >Details</a
-      >
-      <a href="/delete_company/{{ company.id }}" class="btn btn-danger"
-        >Delete</a
-      >
-    </div>
-    {% endfor %} {% endif %}
-  </div>
-  <div class="container pt-4">
-    {% if all_users|length > 0 %}
-    <h2>All Users</h2>
-    {% for user in all_users %}
-    <div style="border: 2px solid black">
-      <p>Name: {{ user.first_name }} {{ user.last_name }}</p>
-      <a href="/user_profile/{{ user.id }}" class="btn btn-info">Details</a>
-      <a href="/delete_user/{{ user.id }}" class="btn btn-danger">Delete</a>
-    </div>
-    {% endfor %} {% endif %}
-  </div>
-</main>
-{% endblock %}
+        {% endfor %} {% endif %}
+      </div>
+      <div class="container pt-4">
+        {% if all_users|length > 0 %}
+        <h2>All Users</h2>
+        {% for user in all_users %}
+        <div style="border: 2px solid black">
+          <p>Name: {{ user.first_name }} {{ user.last_name }}</p>
+          <a href="/user_profile/{{ user.id }}" class="btn btn-info">Details</a>
+          <a href="/delete_user/{{ user.id }}" class="btn btn-danger">Delete</a>
+        </div>
+        {% endfor %} {% endif %}
+      </div>
+    </main>
+  </body>
+</html>

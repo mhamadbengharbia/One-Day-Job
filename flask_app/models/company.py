@@ -41,7 +41,7 @@ class Company():
     # GET ONE COMPANY BY ID
     @classmethod
     def get_company_id(cls ,data):
-        query="SELECT * FROM companies WHERE id = %(id)s"
+        query="SELECT * FROM companies WHERE id = %(id)s;"
         result = connectToMySQL(cls.db_name).query_db(query ,data)
  
         return cls(result[0])

@@ -1,6 +1,7 @@
 from flask import session,render_template,redirect,request, flash
 from flask_app import app
 from flask_app.models import company
+from flask_app.models import job
 from flask_bcrypt import Bcrypt
 
 bcrypt = Bcrypt(app)
@@ -21,7 +22,7 @@ def company_login():
 def company_dashboard(id):
       if not session.get('uuid'):
         return redirect('/login')
-      return render_template('company_dashboard.html', logged_company=company.Company.get_company_id({"id": session['uuid']}))
+      return render_template('company_dashboard.html', logged_company=company.Company.get_company_id({"id": session['uuid']}), all_jobs =job.Job.get_all_jobs({'id': session['uuid']}))
 
 # COMPANY PROFILE
 @app.route('/company_profile/<int:id>')
@@ -43,13 +44,6 @@ def add_job():
       if not session.get('uuid'):
         return redirect('/login')
       return render_template('add_job.html')
-
-# COMPANY UPDATE JOB
-@app.route('/company/update_job')
-def update_job():
-      if not session.get('uuid'):
-        return redirect('/login')
-      return render_template('update_job.html')
 
 # ALL JOBS
 @app.route('/jobs')
