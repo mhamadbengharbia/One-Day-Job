@@ -1,5 +1,25 @@
 {% extends 'template.html' %} {% block title %} Login Type{% endblock %} {%
 block content %}
-<p>Login as a Job Seeker <a href="/user_login">Login</a></p>
-<p>Login as a Company <a href="/company_login">Login</a></p>
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <h4>Login as</h4>
+    </div>
+    <i class="fa-solid fa-briefcase"></i>
+    <p>Job Seeker <a href="/user_login">Login</a></p>
+
+    <i class="fa-solid fa-user"></i>
+    <p>Company <a href="/company_login">Login</a></p>
+
+    <div id="formFooter">
+      <a class="underlineHover" href="/register">Register</a>
+      <a class="underlineHover" href="#">Forgot Password?</a>
+    </div>
+  </div>
+</div>
+
 {% endblock %}

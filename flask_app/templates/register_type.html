@@ -1,5 +1,24 @@
-{% extends 'template.html' %} {% block title %} Register Type{% endblock %} {%
+% extends 'template.html' %} {% block title %} Register Type{% endblock %} {%
 block content %}
-<p>Register as a Job Seeker <a href="/user_register">Register</a></p>
-<p>Register as a Company <a href="/company_register">Register</a></p>
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <h4>Register</h4>
+    </div>
+    <i class="fa-solid fa-briefcase"></i>
+    <p>as a Job Seeker <a href="/user_register">Register</a></p>
+
+    <i class="fa-solid fa-user"></i>
+    <p>as a Company <a href="/company_register">Register</a></p>
+
+    <div id="formFooter">
+      <a class="underlineHover" href="/login">Login</a>
+    </div>
+  </div>
+</div>
+
 {% endblock %}
