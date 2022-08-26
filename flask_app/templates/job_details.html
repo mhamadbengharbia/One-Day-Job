@@ -1,16 +1,29 @@
-{% extends 'template.html' %} {% block title %} One Day Job{% endblock %} {%
+{% extends 'template.html' %} {% block title %} Company Profile{% endblock %} {%
 block content %}
-<div>
-  <h3>Title: {{ sellected_job.title }}</h3>
-  <p>End at: {{ sellected_job.end_at }}</p>
-  <p>Salary: {{ sellected_job.salary }}</p>
-  <p>Industry: {{ sellected_job.industry }}</p>
-  <p>Experience: {{ sellected_job.experience }}</p>
-  <p>Description: {{ sellected_job.description }}</p>
-  <a href="/update_job/{{ sellected_job.id }}" class="btn btn-warning"
-    >Update</a
-  >
-  <a href="/delete_job/{{ sellected_job.id }}" class="btn btn-danger">Delete</a>
-  <a href="/display_jobs" class="btn btn-dark">Dashboard</a>
+<div class="profile_info">
+  <div class="card" style="width: 18rem">
+    <div class="card-body">
+      <h5 class="card-title">{{ sellected_job.title }}</h5>
+      <p class="card-text">End at: {{ sellected_job.end_at }}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">alary: {{ sellected_job.salary }}</li>
+      <li class="list-group-item">
+        Experience: {{ sellected_job.experience }}
+      </li>
+      <li class="list-group-item">
+        Description: {{ sellected_job.description }}
+      </li>
+    </ul>
+    {% if session['uuid'] == sellected_job.company_id %}
+    <a href="/update_job/{{ sellected_job.id }}" class="btn btn-warning"
+      >Update</a
+    >
+    <a href="/delete_job/{{ sellected_job.id }}" class="btn btn-danger"
+      >Delete</a
+    >
+    <a href="/display_jobs" class="btn btn-dark">Dashboard</a>
+    {% endif %}
+  </div>
 </div>
 {% endblock %}

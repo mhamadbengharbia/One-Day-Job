@@ -20,3 +20,21 @@ class Contact():
     def contact_admin(cls, data):
         query="INSERT INTO contacts (name, email, subjuct, description, user_id) Values ( %(name)s, %(email)s, %(subjuct)s, %(description)s, %(user_id)s);"
         return connectToMySQL(cls.db_name).query_db(query,data)
+
+    # SELECT ALL MESSAGES
+    @classmethod
+    def sellect_msgs(cls):
+        query="SELECT * FROM contacts;"
+        result = connectToMySQL(cls.db_name).query_db(query)
+ 
+        all_contacts = []
+        for row in result:
+            all_contacts.append(cls(row))
+        print(all_contacts)
+        return all_contacts
+
+    # DELETE MESSAGE
+    @classmethod
+    def delete_msg(cls, data):
+        query="DELETE FROM contacts WHERE id = %(id)s;"
+        return connectToMySQL(cls.db_name).query_db(query, data)

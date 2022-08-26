@@ -2,7 +2,7 @@
 block content %}
 
 <div class="nine">
-  <h1>700<span>Opportunities</span></h1>
+  <h1>{{ all_jobs|length }}<span>Opportunities</span></h1>
 </div>
 
 <div class="slideshow-container">
@@ -30,6 +30,7 @@ block content %}
 
 <!-- JOBS -->
 <div class="job-slider">
+  {% if latest_jobs|length > 0 %} {% for job in latest_jobs %}
   <div class="card" style="width: 18rem">
     <img
       class="card-img-top"
@@ -37,139 +38,35 @@ block content %}
       alt="Card image cap"
     />
     <div class="card-body">
-      <h5 class="card-title">Company name</h5>
-      <p>job title</p>
+      <h5 class="card-title">{{job.title}}</h5>
+      <p>{{job.company_name}}</p>
     </div>
 
     <div class="card-body cart_btn">
-      <a href="#" id="salaire" class="card-link">salaire</a>
-      <a href="#" class="card-link"
+      <a href="#" id="salaire" class="card-link">{{ job.salary }} TND</a>
+      {% if session['uuid'] %}
+      <a href="/job_details/{{ job.id }}" class="card-link"
         ><button class="button-70 card-link" role="button">Details</button></a
       >
-    </div>
-  </div>
-
-  <div class="card" style="width: 18rem">
-    <img
-      class="card-img-top"
-      src="../static/img/logo.png"
-      alt="Card image cap"
-    />
-    <div class="card-body">
-      <h5 class="card-title">Company name</h5>
-      <p>job title</p>
-    </div>
-
-    <div class="card-body cart_btn">
-      <a href="#" id="salaire" class="card-link">salaire</a>
-      <a href="#" class="card-link"
+      {% else %}
+      <a href="/login" class="card-link"
         ><button class="button-70 card-link" role="button">Details</button></a
       >
+      {% endif %}
     </div>
   </div>
-
-  <div class="card" style="width: 18rem">
-    <img
-      class="card-img-top"
-      src="../static/img/logo.png"
-      alt="Card image cap"
-    />
-    <div class="card-body">
-      <h5 class="card-title">Company name</h5>
-      <p>job title</p>
-    </div>
-
-    <div class="card-body cart_btn">
-      <a href="#" id="salaire" class="card-link">salaire</a>
-      <a href="#" class="card-link"
-        ><button class="button-70 card-link" role="button">Details</button></a
-      >
-    </div>
-  </div>
-
-  <div class="card" style="width: 18rem">
-    <img
-      class="card-img-top"
-      src="../static/img/logo.png"
-      alt="Card image cap"
-    />
-    <div class="card-body">
-      <h5 class="card-title">Company name</h5>
-      <p>job title</p>
-    </div>
-
-    <div class="card-body cart_btn">
-      <a href="#" id="salaire" class="card-link">salaire</a>
-      <a href="#" class="card-link"
-        ><button class="button-70 card-link" role="button">Details</button></a
-      >
-    </div>
-  </div>
-
-  <div class="card" style="width: 18rem">
-    <img
-      class="card-img-top"
-      src="../static/img/logo.png"
-      alt="Card image cap"
-    />
-    <div class="card-body">
-      <h5 class="card-title">Company name</h5>
-      <p>job title</p>
-    </div>
-
-    <div class="card-body cart_btn">
-      <a href="#" id="salaire" class="card-link">salaire</a>
-      <a href="#" class="card-link"
-        ><button class="button-70 card-link" role="button">Details</button></a
-      >
-    </div>
-  </div>
-
-  <div class="card" style="width: 18rem">
-    <img
-      class="card-img-top"
-      src="../static/img/logo.png"
-      alt="Card image cap"
-    />
-    <div class="card-body">
-      <h5 class="card-title">Company name</h5>
-      <p>job title</p>
-    </div>
-
-    <div class="card-body cart_btn">
-      <a href="#" id="salaire" class="card-link">salaire</a>
-      <a href="#" class="card-link"
-        ><button class="button-70 card-link" role="button">Details</button></a
-      >
-    </div>
-  </div>
+  {% endfor %} {% endif %}
 </div>
+
 <div class="show_more">
-  <p><a href="/">Show_more</a></p>
+  <p><a href="/show_all_jobs">Show More</a></p>
 </div>
 <div class="nine">
   <h1>Most Rated<span>Talents</span></h1>
 </div>
 <!-- job seekers -->
 <div class="job-slider">
-  <div class="card" style="width: 18rem">
-    <img
-      class="card-img-top"
-      src="../static/img/logo.png"
-      alt="Card image cap"
-    />
-    <div class="card-body">
-      <h5 class="card-title">Company name</h5>
-      <p>job title</p>
-    </div>
-
-    <div class="card-body cart_btn">
-      <a href="#" id="salaire" class="card-link">salaire</a>
-      <a href="#" class="card-link"
-        ><button class="button-70 card-link" role="button">Details</button></a
-      >
-    </div>
-  </div>
+  {% if top_users|length > 0 %} {% for user in top_users %}
 
   <div class="card" style="width: 18rem">
     <img
@@ -178,96 +75,31 @@ block content %}
       alt="Card image cap"
     />
     <div class="card-body">
-      <h5 class="card-title">Company name</h5>
-      <p>job title</p>
+      <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
+      <p>{{ user.education }}</p>
     </div>
 
     <div class="card-body cart_btn">
-      <a href="#" id="salaire" class="card-link">salaire</a>
-      <a href="#" class="card-link"
-        ><button class="button-70 card-link" role="button">Details</button></a
+      {% if session['uuid'] %}
+      <a href="#" id="salaire" class="card-link">contact</a>
+      {% else %}
+      <a href="/login" id="salaire" class="card-link">contact</a>
+      {% endif %} {% if session['uuid'] %}
+      <a href="/user_dashboard/{{user.id}}" class="card-link"
+        ><button class="button-70 card-link" role="button">Profile</button></a
       >
+      {% else %}
+      <a href="/login" class="card-link"
+        ><button class="button-70 card-link" role="button">Profile</button></a
+      >
+      {% endif %}
     </div>
   </div>
 
-  <div class="card" style="width: 18rem">
-    <img
-      class="card-img-top"
-      src="../static/img/logo.png"
-      alt="Card image cap"
-    />
-    <div class="card-body">
-      <h5 class="card-title">Company name</h5>
-      <p>job title</p>
-    </div>
-
-    <div class="card-body cart_btn">
-      <a href="#" id="salaire" class="card-link">salaire</a>
-      <a href="#" class="card-link"
-        ><button class="button-70 card-link" role="button">Details</button></a
-      >
-    </div>
-  </div>
-
-  <div class="card" style="width: 18rem">
-    <img
-      class="card-img-top"
-      src="../static/img/logo.png"
-      alt="Card image cap"
-    />
-    <div class="card-body">
-      <h5 class="card-title">Company name</h5>
-      <p>job title</p>
-    </div>
-
-    <div class="card-body cart_btn">
-      <a href="#" id="salaire" class="card-link">salaire</a>
-      <a href="#" class="card-link"
-        ><button class="button-70 card-link" role="button">Details</button></a
-      >
-    </div>
-  </div>
-
-  <div class="card" style="width: 18rem">
-    <img
-      class="card-img-top"
-      src="../static/img/logo.png"
-      alt="Card image cap"
-    />
-    <div class="card-body">
-      <h5 class="card-title">Company name</h5>
-      <p>job title</p>
-    </div>
-
-    <div class="card-body cart_btn">
-      <a href="#" id="salaire" class="card-link">salaire</a>
-      <a href="#" class="card-link"
-        ><button class="button-70 card-link" role="button">Details</button></a
-      >
-    </div>
-  </div>
-
-  <div class="card" style="width: 18rem">
-    <img
-      class="card-img-top"
-      src="../static/img/logo.png"
-      alt="Card image cap"
-    />
-    <div class="card-body">
-      <h5 class="card-title">Company name</h5>
-      <p>job title</p>
-    </div>
-
-    <div class="card-body cart_btn">
-      <a href="#" id="salaire" class="card-link">salaire</a>
-      <a href="#" class="card-link"
-        ><button class="button-70 card-link" role="button">Details</button></a
-      >
-    </div>
-  </div>
+  {% endfor %} {% endif %}
 </div>
 <div class="show_more">
-  <p><a href="/">Show_more</a></p>
+  <p><a href="/show_all_talents">Show More</a></p>
 </div>
 
 <script src="../static/js/script.js"></script>

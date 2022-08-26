@@ -1,12 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>All Jobs</title>
-  </head>
-  <body>
-    <h1>All Jobs</h1>
-  </body>
-</html>
+{% extends 'template.html' %} {% block title %}Add a job{% endblock %} {% block
+content %}
+
+<div class="nine">
+  <h1>ALL JOBS</h1>
+</div>
+<div class="job-slider">
+  <div class="job-slider">
+    {% if all_jobs|length > 0 %} {% for job in all_jobs %}
+    <div class="card" style="width: 18rem">
+      <img
+        class="card-img-top"
+        src="../static/img/logo.png"
+        alt="Card image cap"
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{job.title}}</h5>
+        <p>{{job.company_name}}</p>
+      </div>
+
+      <div class="card-body cart_btn">
+        <a href="#" id="salaire" class="card-link">{{ job.salary }} TND</a>
+        {% if session['uuid'] %}
+        <a href="/job_details/{{ job.id }}" class="card-link"
+          ><button class="button-70 card-link" role="button">Details</button></a
+        >
+        {% else %}
+        <a href="/login" class="card-link"
+          ><button class="button-70 card-link" role="button">Details</button></a
+        >
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %} {% endif %}
+  </div>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+  </nav>
+</div>
+{% endblock %}

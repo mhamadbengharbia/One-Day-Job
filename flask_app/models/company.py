@@ -58,10 +58,28 @@ class Company():
         
         return all_companies
 
+    # GET BEST COMPANIES
+    @classmethod
+    def get_best_companies(cls):
+        query="SELECT * FROM companies ORDER BY id DESC LIMIT 4;"
+        result = connectToMySQL(cls.db_name).query_db(query)
+ 
+        all_companies = []
+        for row in result:
+            all_companies.append(cls(row))
+        
+        return all_companies
+
     # DELETE COMPANY
     @classmethod
     def delete_company(cls, data):
         query="DELETE FROM companies WHERE id = %(id)s;"
+        return connectToMySQL(cls.db_name).query_db(query, data)
+
+    # UPDATE COMPANY
+    @classmethod
+    def edit_company_profile(cls, data):
+        query = "UPDATE companies SET company=%(company)s, email=%(email)s, phone=%(phone)s, web_site=%(web_site)s, description=%(description)s, unique_identfier=%(unique_identfier)s WHERE id=%(id)s;"
         return connectToMySQL(cls.db_name).query_db(query, data)
  
 

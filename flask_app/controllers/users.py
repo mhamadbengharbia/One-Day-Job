@@ -2,6 +2,8 @@ from flask import render_template,redirect,session,request, flash
 from flask_app import app
 from flask_app.models import user
 from flask_app.models import company
+from flask_app.models import job
+from flask_app.models import contact
 from flask_bcrypt import Bcrypt
 
 bcrypt = Bcrypt(app)
@@ -10,12 +12,17 @@ bcrypt = Bcrypt(app)
 # HOME PAGE
 @app.route('/')
 def index():
-      return render_template("index.html")
+      latest_jobs = job.Job.select_latest_jobs();
+      all_jobs = job.Job.select_all_jobs();
+      top_users = user.User.get_top_users()
+      return render_template("index.html", latest_jobs=latest_jobs, all_jobs=all_jobs, top_users=top_users)
 
 # ABOUT PAGE
 @app.route('/about')
 def about():
-      return render_template("about.html")
+      top_companies = company.Company.get_best_companies()
+      top_users = user.User.get_top_users()
+      return render_template("about.html", top_companies=top_companies, top_users=top_users)
 
 # LOGIN TYPE
 @app.route('/login')
@@ -71,12 +78,31 @@ def display_users():
       all_users = user.User.get_all_users()
       return render_template('admin_dashboard.html', logged_user=logged_user, all_users=all_users)
 
+# DISPLAY ADMIN CONTACTS
+@app.route('/sellect_msgs')
+def sellect_msgs():
+      logged_user = user.User.get_user_id({"id": session['uuid']})
+      if logged_user.type != 1:
+            return redirect('/') # TODO ADD PAGE NOT FOUND TEMPLATE
+      admin_contacts=contact.Contact.sellect_msgs()
+      return render_template('admin_dashboard.html', logged_user=logged_user, admin_contacts=admin_contacts)
+# DELETE MESSAGE
+@app.route('/delete_msg/<int:id>')
+def delete_msg(id):
+      if not session.get('uuid'):
+        return redirect('/login')
+      logged_user = user.User.get_user_id({"id": session['uuid']})
+      if logged_user.type != 1:
+            return redirect('/') # TODO ADD PAGE NOT FOUND TEMPLATE
+      contact.Contact.delete_msg({'id': id})
+      return redirect('/sellect_msgs')
+
 # USER DASHBOARD
 @app.route('/user_dashboard/<int:id>')
 def user_dashboard(id):
       if not session.get('uuid'):
         return redirect('/login')
-      return render_template('user_dashboard.html', logged_user=user.User.get_user_id({"id": session['uuid']}))
+      return render_template('user_profile.html', logged_user=user.User.get_user_id({"id": id}))
 
 # USER PROFILE
 @app.route('/user_profile/<int:id>')
@@ -90,9 +116,13 @@ def user_profile(id):
 def update_user_profile(id):
       if not session.get('uuid'):
         return redirect('/login')
-      return render_template('update_user_profile.html')
+      return render_template('update_user_profile.html', selected_user=user.User.get_user_id({'id': id}))
 
-
+# EDIT USER PROFILE
+@app.route('/edit_user_profile/<int:id>', methods=['POST'])
+def edit_user_profile(id):
+      user.User.edit_user_profile({**request.form, 'id': id})
+      return redirect(f'/user_profile/{id}')
 
 # CREATE NEW USER ROUTE
 @app.route('/add_user', methods=['POST'])
@@ -152,3 +182,9 @@ def delete_user(id):
       user.User.delete_user({"id": id})
 
       return redirect(f"/admin_dashboard/{session['uuid']}")
+
+# SHOW ALL TALENTS IN all_job_seekers.html TEMPLATE
+@app.route('/show_all_talents')
+def show_all_talents():
+    all_talents = user.User.get_all_users()
+    return render_template('all_job_seekers.html', all_talents=all_talents)

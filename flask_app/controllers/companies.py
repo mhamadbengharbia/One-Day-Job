@@ -15,7 +15,7 @@ def company_register():
 # COMPANY LOGIN
 @app.route('/company_login')
 def company_login():
-      return render_template("company_login.html")
+      return render_template("company_login.html") 
 
 # COMPANY DASHBOARD
 @app.route('/company_dashboard/<int:id>')
@@ -36,7 +36,13 @@ def company_profile(id):
 def update_company_profile(id):
       if not session.get('uuid'):
         return redirect('/login')
-      return render_template('update_company_profile.html')
+      return render_template('update_company_profile.html', up_company=company.Company.get_company_id({'id': id}))
+
+# EDIT COMPANY PROFILE
+@app.route('/edit_company_profile/<int:id>', methods=['POST'])
+def edit_company_profile(id):
+      company.Company.edit_company_profile({**request.form, 'id':id})
+      return redirect(f'/company_profile/{id}')
 
 # COMPANY ADD JOB
 @app.route('/company/add_job')
@@ -71,10 +77,10 @@ def login_company():
     selected_company = company.Company.get_company_by_email(request.form)
     if not selected_company:
         flash("Invalid Email / Password ", 'login')
-        return redirect('/user_login')
+        return redirect('/company_login')
     if not bcrypt.check_password_hash(selected_company.password, request.form['password']):
         flash("Invalid Email / Password ", 'login')
-        return redirect('/user_login')
+        return redirect('/company_login')
     
     session['uuid'] = selected_company.id
     

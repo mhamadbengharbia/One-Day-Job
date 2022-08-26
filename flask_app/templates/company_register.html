@@ -41,13 +41,6 @@ block content %}
     <div class="Who_are_you">
       
     <form class="form-group row rad" action="add_company" method="post">
-
-      <h5>You're :</h5>
-       <div>
-        <label for="job_seeker">Job seeker</label>
-        <input type="radio" name="you_are" value="job_seeker" checked/></div>
-              <div> <label for="job_seeker">Company</label>
-        <input type="radio" name="you_are" value="Comapny" /></div>
      
     </div>
     </form>
@@ -81,7 +74,11 @@ block content %}
      <div class=" date_input"> 
  <select name="activite_area" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
     <option selected>Activity area...</option>
-    <option value="1">IT</option>
+    <option value="IT">IT</option>
+    <option value="Design">Design</option>
+    <option value="Marketing">Marketing</option>
+    <option value="Translation">Translation</option>
+    <option value="Networking">Networking</option>
   </select> 
  </div>
 <div class="row"> 
@@ -116,7 +113,8 @@ block content %}
   </select>     
 </div>
 
-    <div> 
+    <div>
+      <input type="checkbox" name="" id="">
     <label for=""> <a href="/conditions">   Privacy & conditions</a></label>   
   
   </div>

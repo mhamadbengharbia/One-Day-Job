@@ -7,7 +7,7 @@ block content %}
 <p>Unique ID: {{ logged_company.unique_identfier }}</p>
 <p>Activite Area: {{ logged_company.activite_area }}</p>
 <p>Description: {{ logged_company.description }}</p>
-{% if logged_company.id == logged_company %}
-<a href="/">Edit Profile</a> |
+{% if logged_company.id == session['uuid'] %}
+<a href="/update_company_profile/{{ logged_company.id }}">Edit Profile</a> |
 <a href="/company_dashboard/{{ logged_company.id }}">Back to dashboard</a>
 {% endif %} {% endblock %}

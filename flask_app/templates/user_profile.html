@@ -1,12 +1,37 @@
-{% extends 'template.html' %} {% block title %} user Dashboard{% endblock %} {%
+{% extends 'template.html' %} {% block title %} Company Profile{% endblock %} {%
 block content %}
-<p>Name: {{ logged_user.first_name }} {{ logged_user.last_name }}</p>
-<p>Email: {{ logged_user.email }}</p>
-<p>Phone: {{ logged_user.phone }}</p>
-<p>Experience: {{ logged_user.experience }}</p>
-<p>Education: {{ logged_user.education }}</p>
-<p>Birthday: {{ logged_user.birth_date }}</p>
-{% if logged_user.id == session['uuid'] %}
-<a href="/">Edit Profile</a> |
-<a href="/user_dashboard/{{ logged_user.id }}">Back to dashboard</a>
-{% endif %} {% endblock %}
+<div class="profile_info">
+  <div class="card" style="width: 18rem">
+    <div class="card-body">
+      <h5 class="card-title">
+        {{ logged_user.first_name }} {{ logged_user.last_name }}
+      </h5>
+      <p class="card-text">Email: {{ logged_user.email }}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Phone: {{ logged_user.phone }}</li>
+      <li class="list-group-item">Experience: {{ logged_user.information }}</li>
+      <li class="list-group-item">Education: {{ logged_user.experience }}</li>
+      <li class="list-group-item">Birthday: {{ logged_user.birth_date }}</li>
+
+      {% if logged_user.id == session['uuid'] %}
+      <li>
+        <div class="card-body">
+          <a
+            href="/update_user_profile/{{ logged_user.id }}"
+            class="card-link btn btn-success"
+            >EDIT</a
+          >
+        </div>
+      </li>
+      {% else %}
+      <li>
+        <div class="card-body">
+          <a href="#" class="card-link btn btn-primary">CONTACT</a>
+        </div>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

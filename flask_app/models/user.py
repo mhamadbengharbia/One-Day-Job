@@ -66,6 +66,25 @@ class User():
         return connectToMySQL(cls.db_name).query_db(query, data)
 
 
+    # GET TOP USERS
+    @classmethod
+    def get_top_users(cls):
+        query="SELECT * FROM users WHERE type != 1 LIMIT 5;"
+        result = connectToMySQL(cls.db_name).query_db(query)
+ 
+        all_users = []
+        for row in result:
+            all_users.append(cls(row))
+        
+        return all_users
+
+    # UPDATE USER
+    @classmethod
+    def edit_user_profile(cls, data):
+        query = "UPDATE users SET first_name=%(first_name)s, last_name=%(last_name)s, address_id=%(address_id)s, education=%(education)s, experience=%(experience)s, email=%(email)s, phone=%(phone)s, information=%(information)s WHERE id=%(id)s;"
+        return connectToMySQL(cls.db_name).query_db(query, data)
+
+
 
     @staticmethod
     def validate_user_register(user):

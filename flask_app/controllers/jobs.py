@@ -47,3 +47,11 @@ def update_job(id):
 def edit_job(id):
     job.Job.edit_job({**request.form, 'id': id})
     return redirect(f'/job_details/{id}')
+
+
+# SHOW ALL JOBS IN all_jobs.html TEMPLATE
+@app.route('/show_all_jobs')
+def show_all_jobs():
+    all_jobs = job.Job.select_all_jobs()
+    return render_template('all_jobs.html', all_jobs=all_jobs)
+

@@ -1,0 +1,42 @@
+{% extends 'template.html' %} {% block title %}Add a job{% endblock %} {% block
+content %}
+
+<div class="nine">
+  <h1>ALL Talents</h1>
+</div>
+<div class="job-slider">
+  <div class="job-slider">
+    {% if all_talents|length > 0 %} {% for talent in all_talents %}
+    <div class="card" style="width: 18rem">
+      <img
+        class="card-img-top"
+        src="../static/img/logo.png"
+        alt="Card image cap"
+      />
+      <div class="card-body">
+        <h5 class="card-title">
+          {{ talent.first_name }} {{ talent.last_name }}
+        </h5>
+        <p>{{ talent.education }}</p>
+      </div>
+
+      <div class="card-body cart_btn">
+        {% if session['uuid'] %}
+        <a href="#" id="salaire" class="card-link">contact</a>
+        {% else %}
+        <a href="/login" id="salaire" class="card-link">contact</a>
+        {% endif %} {% if session['uuid'] %}
+        <a href="/user_dashboard/{{talent.id}}" class="card-link"
+          ><button class="button-70 card-link" role="button">Profile</button></a
+        >
+        {% else %}
+        <a href="/login" class="card-link"
+          ><button class="button-70 card-link" role="button">Profile</button></a
+        >
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %} {% endif %}
+  </div>
+</div>
+{% endblock %}
