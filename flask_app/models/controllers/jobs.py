@@ -51,16 +51,13 @@ def delete_job(id):
 # UPDATE JOB TEMPLATE
 @app.route('/update_job/<int:id>')
 def update_job(id):
- 
-    if not session.get('uuid'):
+      if not session.get('uuid'):
         return redirect('/login')
-    return render_template('update_job.html', sellected_job=job.Job.get_job_id({'id': id}))
+      return render_template('update_job.html', sellected_job=job.Job.get_job_id({'id': id}))
 
 # EDIT JOB
 @app.route('/edit_job/<int:id>', methods=['POST'])
 def edit_job(id):
-    if not company.Company.validate_company_addjob(request.form):
-        return redirect(f'/update_job/{id}')
     job.Job.edit_job({**request.form, 'id': id})
     return redirect(f'/job_details/{id}')
 

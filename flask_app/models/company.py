@@ -121,4 +121,36 @@ class Company():
             is_valid= False
         if company['password'] != company['confirm_password']:
             flash("Passwords don't match","company_register")
+        if  'accept' not in company.keys() :
+            flash("Please accept out term and conditions","company_register")
+            is_valid= False
+        return is_valid
+
+
+
+    # CAdd a job validation form
+    @staticmethod
+    def validate_company_addjob(company):
+        is_valid = True
+        if len(company['title']) < 2:
+            flash("Invalid Title !!!","company_add")
+            is_valid=False
+        if (company['salary']) < "0":
+            flash("Salary can't be emty or negative","company_add")
+            is_valid= False
+        if company['end_at'] == "":
+            flash("Choose an end at date","company_add")
+            is_valid= False
+        if (company['industry']) == "Job type...":
+            flash("Job type can't be empty","company_add")
+            is_valid= False
+        if len(company['experience']) < 10:
+            flash("experience must be at least 10 characters","company_add")
+            is_valid= False
+        if len(company['description']) < 10:
+            flash("description must be at least 10 characters","company_add")
+            is_valid= False
+        if  'accept' not in company.keys() :
+            flash("Please accept out term and conditions","company_add")
+            is_valid= False
         return is_valid

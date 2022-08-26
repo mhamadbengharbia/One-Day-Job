@@ -5,44 +5,22 @@ block content %}
 <div class="container register">
   <div class="reg_left">
     <h4>Create a profile</h4>
-    <p>Creating a ODJ profile will help you to</p>
+    <p>Talents looking for jobs</p>
+<img src="../static/img/01.webp" width="40%" alt="">
+
+        <p>Creating a ODJ profile will help you to</p>
     <p>
       Receive alerts for the best Talents using advanced filters and to add a
       jobs opportunity so you can hire the best for your company
     </p>
     <p>You can connect via social media</p>
-    <div class="socialicons">
-      <img
-        class="socialicons"
-        src="../static/img/facebook.svg"
-        alt="facebook"
-        srcset=""
-      />
-      <img
-        class="socialicons"
-        src="../static/img/linkedin.svg"
-        alt="linkedin"
-        srcset=""
-      />
-      <img
-        class="socialicons"
-        src="../static/img/envelope-fill.svg"
-        alt="envelope"
-        srcset=""
-      />
-    </div>
-    <p>Talents looking for jobs</p>
     <p>
       if you represente a company or organization and want to hire, create an
       account to search for talents
     </p>
   </div>
   <div class="reg_right">
-    <div class="Who_are_you">
-      
-    <form class="form-group row rad" action="add_company" method="post">
-     
-    </div>
+    
     </form>
 
     <form action="/add_company" method="post" class="form-group row the_register_form">
@@ -53,7 +31,7 @@ block content %}
         <p>{{ message }}</p>
       </div>
       {% endfor %} {% endif %} {% endwith %}
-  <div class="row">
+  <div class="row date_input" >
     <div class="col">
       <input name="company" type="text" class="form-control" placeholder="Company">
     </div>
@@ -62,7 +40,7 @@ block content %}
     </div>
   </div>
   
-<div class="row"> 
+<div class="row date_input"> 
     <div class="col">
       <input name="phone" type="number" class="form-control" placeholder="Phone number">
     </div>
@@ -81,7 +59,7 @@ block content %}
     <option value="Networking">Networking</option>
   </select> 
  </div>
-<div class="row"> 
+<div class="row date_input"> 
     <div class="col">
       <input name="password" type="password" class="form-control" placeholder="Password">
     </div>
@@ -110,11 +88,18 @@ block content %}
  <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="address_id">
     <option selected>City</option>
     <option value="1">Tunis</option>
+    <option value="2"> Bizerte</option>
+    <option value="3">Sfax</option>
+    <option value="4">Qayrawan</option>
+    <option value="5">Sousse</option>
+    <option value="6">Nabeul</option>
+    <option value="7">Beja</option>
+    <option value="8">Mahdia</option>
   </select>     
 </div>
 
     <div>
-      <input type="checkbox" name="" id="">
+      <input type="checkbox" name="accept" value="1" id="">
     <label for=""> <a href="/conditions">   Privacy & conditions</a></label>   
   
   </div>

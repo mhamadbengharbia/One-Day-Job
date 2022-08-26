@@ -31,7 +31,7 @@ block content %}
 <!-- JOBS -->
 <div class="job-slider">
   {% if latest_jobs|length > 0 %} {% for job in latest_jobs %}
-  <div class="card" style="width: 18rem">
+  <div class="card profile_img" style="width: 18rem">
     <img
       class="card-img-top"
       src="../static/img/logo.png"
@@ -68,12 +68,8 @@ block content %}
 <div class="job-slider">
   {% if top_users|length > 0 %} {% for user in top_users %}
 
-  <div class="card" style="width: 18rem">
-    <img
-      class="card-img-top"
-      src="../static/img/logo.png"
-      alt="Card image cap"
-    />
+  <div class="card profile_img" style="width: 18rem">
+    <img class="card-img-top" src="../static/img/8.png" alt="Card image cap" />
     <div class="card-body">
       <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
       <p>{{ user.education }}</p>

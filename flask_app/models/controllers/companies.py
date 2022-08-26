@@ -41,8 +41,7 @@ def update_company_profile(id):
 # EDIT COMPANY PROFILE
 @app.route('/edit_company_profile/<int:id>', methods=['POST'])
 def edit_company_profile(id):
-      if not company.Company.validate_company_register(request.form):
-        return redirect(f'/update_company_profile/{id}')
+      
       company.Company.edit_company_profile({**request.form, 'id':id})
       return redirect(f'/company_profile/{id}')
 

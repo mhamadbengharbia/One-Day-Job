@@ -5,6 +5,17 @@
 body {
   background-color: #f0f2f5;
   font-family: sans-serif;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+footer {
+  width: 100%;
+  clear: both;
+  position: relative;
+  margin-bottom: 0;
+  margin-top: auto;
 }
 #logo {
   width: 8%;
@@ -57,13 +68,7 @@ body {
 #logo2 {
   width: 40%;
 }
-footer {
-  width: 100%;
-  clear: both;
-  position: relative;
-  margin-bottom: 0;
-  margin-top: 200px;
-}
+
 .btn-primary {
   background-color: #01aded;
 }
@@ -725,4 +730,14 @@ img {
 .profile_info {
   display: flex;
   margin-left: 45%;
+}
+/*index*/
+.profile_img {
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.card-img-top {
+  width: 50%;
 }

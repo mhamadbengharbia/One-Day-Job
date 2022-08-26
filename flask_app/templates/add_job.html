@@ -1,48 +1,26 @@
 {% extends 'template.html' %} {% block title %}Add a job{% endblock %} {%
 block content %}
-
 <div class="container register">
   <div class="reg_left">
     <h4>Add a job</h4>
-    <p>Using OBJ will help you to find best talents</p>
-    <p>
-      Receive alerts for the best Talents using advanced filters and to add a
-      jobs opportunity so you can hire the best for your company
-    </p>
-    <p>You can connect via social media</p>
-    <div class="socialicons">
-      <img
-        class="socialicons"
-        src="../static/img/facebook.svg"
-        alt="facebook"
-        srcset=""
-      />
-      <img
-        class="socialicons"
-        src="../static/img/linkedin.svg"
-        alt="linkedin"
-        srcset=""
-      />
-      <img
-        class="socialicons"
-        src="../static/img/envelope-fill.svg"
-        alt="envelope"
-        srcset=""
-      />
-    </div>
-    <p>Talents looking for jobs</p>
-    <p>
-      if you represente a company or organization and want to hire, just add a job via this formulaire
-    </p>
+   
+<img src="../static/img/03.png" width="60%" alt="">
+
   </div>
   <div class="reg_right">
     <div class="Who_are_you">
-      
+              {% with messages = get_flashed_messages(category_filter=["company_add"]) %}
+      {% if messages %} {% for message in messages %}
+      <div class="alert alert-danger">
+        <p>{{ message }}</p>
+      </div>
+      {% endfor %} {% endif %} {% endwith %}
     <form action="/create_job" method="post" class="form-group row the_register_form">
+
     <!-- SEND THE COMPANY ID -->
     <input type="hidden" name="company_id" value="{{ session['uuid'] }}">
  
-  <div class="row">
+  <div class="row date_input ">
     <div class="col">
       <input name="title" type="text" class="form-control" placeholder="Job Title">
     </div>
@@ -90,19 +68,18 @@ block content %}
 
 <div class="row  "> 
     <div class="col">
-      <input name="accept" type="checkbox"   >
+      <input name="accept" type="checkbox"  value="1" >
       <label for=""> I accept all conditions    </label>    </div>
 
     </div>
     <div> 
     <label for=""> <a href="/conditions">   Privacy & conditions</a></label>   
+     <button class="btn btn-primary">Add</button>  
   
   </div>
 <div class="row date_input"> 
 
-<div class="col">
- <button class="btn btn-primary">Add</button>  
-    </div>
+ 
   
   </div>
   </form>

@@ -191,11 +191,3 @@ def delete_user(id):
 def show_all_talents():
     all_talents = user.User.get_all_users()
     return render_template('all_job_seekers.html', all_talents=all_talents)
-
-
-#privacy roote
-
-@app.route('/conditions')
-def conditions():
- 
-    return render_template('policy.html')

@@ -20,7 +20,7 @@ class Job():
     # CREATE NEW JOB
     @classmethod
     def add_job(cls ,data):
-        query="INSERT INTO jobs (company_id, salary, title, industry, experience, description, end_at) Values (%(company_id)s, %(salary)s, %(title)s, %(industry)s, %(experience)s, %(description)s, %(end_at)s);"
+        query="INSERT INTO jobs (company_id, salary, title, industry, experience, description, end_at)  Values (%(company_id)s, %(salary)s, %(title)s, %(industry)s, %(experience)s, %(description)s, %(end_at)s);"
         return connectToMySQL(cls.db_name).query_db(query,data)
 
     # GET ALL COMPANY Jobs

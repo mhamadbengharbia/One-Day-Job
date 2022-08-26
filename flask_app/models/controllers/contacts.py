@@ -13,7 +13,3 @@ def contact_admin():
 
     return redirect('/contact')
 
-@app.route('/send_messages')
-def send_messages():
- 
-    return render_template('messages.html')

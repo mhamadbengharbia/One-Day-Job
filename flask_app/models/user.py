@@ -108,4 +108,7 @@ class User():
             is_valid= False
         if user['password'] != user['confirm_password']:
             flash("Passwords don't match","register")
+        if  'accept' not in user.keys() :
+            flash("Please accept out term and conditions","register")
+            is_valid= False
         return is_valid

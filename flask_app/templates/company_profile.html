@@ -1,13 +1,43 @@
 {% extends 'template.html' %} {% block title %} Company Profile{% endblock %} {%
 block content %}
-<h1>{{ logged_company.company }}</h1>
-<p>Email: {{ logged_company.email }}</p>
-<p>Phone: {{ logged_company.phone }}</p>
-<p>Web Site: {{ logged_company.web_site }}</p>
-<p>Unique ID: {{ logged_company.unique_identfier }}</p>
-<p>Activite Area: {{ logged_company.activite_area }}</p>
-<p>Description: {{ logged_company.description }}</p>
-{% if logged_company.id == session['uuid'] %}
-<a href="/update_company_profile/{{ logged_company.id }}">Edit Profile</a> |
-<a href="/company_dashboard/{{ logged_company.id }}">Back to dashboard</a>
-{% endif %} {% endblock %}
+<div class="profile_info">
+  <div class="card" style="width: 18rem">
+    <div class="card-body">
+      <h5 class="card-title">{{ logged_company.company }}</h5>
+      <p class="card-text">Email: {{ logged_company.email }}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Phone: {{ logged_company.phone }}</li>
+      <li class="list-group-item">Web Site: {{ logged_company.web_site }}</li>
+      <li class="list-group-item">
+        Unique ID: {{ logged_company.unique_identfier }}
+      </li>
+      <li class="list-group-item">
+        Activite Area: {{ logged_company.activite_area }}
+      </li>
+      <li class="list-group-item">
+        Description: {{ logged_company.description }}
+      </li>
+      <li class="list-group-item">
+        Unique ID: {{ logged_company.unique_identfier }}
+      </li>
+      <li>
+        <div class="card-body">
+          {% if logged_company.id == session['uuid'] %}
+          <a
+            class="btn btn-success"
+            href="/update_company_profile/{{ logged_company.id }}"
+            >Edit Profile</a
+          >
+          <a
+            class="btn btn-primary"
+            href="/company_dashboard/{{ logged_company.id }}"
+            >Back to dashboard</a
+          >
+          {% endif %}
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+{% endblock %}

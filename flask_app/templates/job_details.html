@@ -1,5 +1,6 @@
 {% extends 'template.html' %} {% block title %} Company Profile{% endblock %} {%
 block content %}
+<style></style>
 <div class="profile_info">
   <div class="card" style="width: 18rem">
     <div class="card-body">
@@ -14,15 +15,18 @@ block content %}
       <li class="list-group-item">
         Description: {{ sellected_job.description }}
       </li>
+      <li>
+        {% if session['uuid'] == sellected_job.company_id %}
+        <a href="/update_job/{{ sellected_job.id }}" class="btn btn-warning"
+          >Edit</a
+        >
+        <a href="/delete_job/{{ sellected_job.id }}" class="btn btn-danger"
+          >Delete</a
+        >
+        <a href="/display_jobs" class="btn btn-dark">Dashboard</a>
+      </li>
     </ul>
-    {% if session['uuid'] == sellected_job.company_id %}
-    <a href="/update_job/{{ sellected_job.id }}" class="btn btn-warning"
-      >Update</a
-    >
-    <a href="/delete_job/{{ sellected_job.id }}" class="btn btn-danger"
-      >Delete</a
-    >
-    <a href="/display_jobs" class="btn btn-dark">Dashboard</a>
+
     {% endif %}
   </div>
 </div>

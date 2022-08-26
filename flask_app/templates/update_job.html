@@ -39,9 +39,14 @@ block content %}
     <div class="Who_are_you">
       
     <form action="/edit_job/{{ sellected_job.id }}" method="post" class="form-group row the_register_form">
-
+   {% with messages = get_flashed_messages(category_filter=["company_add"]) %}
+      {% if messages %} {% for message in messages %}
+      <div class="alert alert-danger">
+        <p>{{ message }}</p>
+      </div>
+      {% endfor %} {% endif %} {% endwith %}
  
-  <div class="row">
+  <div class="row date_input">
     <div class="col">
       <input name="title" type="text" class="form-control" value="{{ sellected_job.title }}">
     </div>
@@ -86,18 +91,15 @@ block content %}
 <div class="row  "> 
     <div class="col">
       <input name="accept" type="checkbox"   >
-      <label for=""> I accept all conditions    </label>    </div>
+   <a href="/conditions">   Privacy & conditions</a></label>     </div>
 
     </div>
     <div> 
-    <label for=""> <a href="/conditions">   Privacy & conditions</a></label>   
+    <label for="">    <button class="btn btn-primary">Update</button>  
   
   </div>
 <div class="row date_input"> 
-
-<div class="col">
- <button class="btn btn-primary">Update</button>  
-    </div>
+ 
   
   </div>
   </form>
